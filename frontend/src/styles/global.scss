@@ -61,6 +61,7 @@ h1 { max-width: 34rem; margin-bottom: $space-4; font-family: $serif; font-size: 
 .checkout-panel { max-width: 48rem; margin: $space-6 auto; padding: clamp($space-4, 5vw, $space-6); }
 .checkout-top { display: flex; justify-content: space-between; gap: $space-4; align-items: start; margin-bottom: $space-5; }
 .checkout-top h1 { margin-bottom: $space-2; font-size: clamp(2.5rem, 6vw, 4.5rem); }
+.signed-in-user { margin-bottom: $space-2; color: $forest-dark; font-weight: 700; }
 .summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: $space-3; margin-bottom: $space-5; padding: $space-3; background: $paper; border-radius: $radius-sm; }
 .summary span { display: block; color: $muted; font-size: 0.78rem; }
 .summary strong { display: block; margin-top: 0.25rem; }

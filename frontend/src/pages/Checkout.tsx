@@ -142,6 +142,7 @@ export function Checkout() {
           <div>
             <p className="eyebrow">Secure checkout</p>
             <h1>Almost yours.</h1>
+            {activeUser && <p className="signed-in-user">Signed in as {activeUser.firstName} {activeUser.lastName}</p>}
             <p className="lede">Confirm your delivery details and verify your identity with a one-time passcode.</p>
           </div>
         </div>
