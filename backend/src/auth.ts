@@ -37,14 +37,16 @@ export async function createSession(userId: number, response: Response): Promise
     [tokenHash, userId, expiresAt],
   )
 
-  const secure = process.env.NODE_ENV === 'production' ? '; Secure' : ''
-  response.setHeader('Set-Cookie', `${COOKIE_NAME}=${encodeURIComponent(token)}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${Math.floor(sessionTtlHours * 60 * 60)}${secure}`)
+  const production = process.env.NODE_ENV === 'production'
+  const cookiePolicy = production ? '; Secure; SameSite=None' : '; SameSite=Lax'
+  response.setHeader('Set-Cookie', `${COOKIE_NAME}=${encodeURIComponent(token)}; HttpOnly${cookiePolicy}; Path=/; Max-Age=${Math.floor(sessionTtlHours * 60 * 60)}`)
 }
 
 export async function clearSession(request: Request, response: Response): Promise<void> {
   const token = readCookie(request, COOKIE_NAME)
   if (token) await pool.query('DELETE FROM sessions WHERE token_hash = $1', [hashValue(token)])
-  response.setHeader('Set-Cookie', `${COOKIE_NAME}=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0`)
+  const cookiePolicy = process.env.NODE_ENV === 'production' ? '; Secure; SameSite=None' : '; SameSite=Lax'
+  response.setHeader('Set-Cookie', `${COOKIE_NAME}=; HttpOnly${cookiePolicy}; Path=/; Max-Age=0`)
 }
 
 export async function requireAuth(request: AuthenticatedRequest, response: Response, next: NextFunction): Promise<void> {
