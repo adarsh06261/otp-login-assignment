@@ -1,0 +1,85 @@
+@use './theme' as *;
+
+:root {
+  font-family: $sans;
+  color: $ink;
+  background: $paper;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+.app-shell {
+  min-height: 100vh;
+  background: radial-gradient(circle at 90% 0%, $mint 0, transparent 32%), $paper;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: $space-4 $space-5;
+}
+
+.brand { font-family: $serif; font-size: 1.35rem; font-weight: 700; color: $forest-dark; }
+.header-note { color: $muted; font-size: 0.85rem; }
+.page { max-width: 72rem; margin: 0 auto; padding: $space-5; }
+.auth-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.8fr); gap: $space-6; align-items: center; min-height: calc(100vh - 5.5rem); }
+.eyebrow { color: $forest; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+h1, h2, p { margin-top: 0; }
+h1 { max-width: 34rem; margin-bottom: $space-4; font-family: $serif; font-size: clamp(2.75rem, 6vw, 5.2rem); line-height: 0.98; font-weight: 500; letter-spacing: -0.04em; }
+.lede { max-width: 31rem; color: $muted; font-size: 1.05rem; line-height: 1.7; }
+.form-panel, .checkout-panel { background: rgba($surface, 0.84); border: 1px solid $line; border-radius: $radius-lg; box-shadow: $shadow; }
+.form-panel { max-width: 31rem; padding: $space-5; }
+.form-heading { margin-bottom: $space-4; font-size: 1.35rem; }
+.field { margin-bottom: $space-3; }
+.field label { display: block; margin-bottom: $space-1; font-size: 0.85rem; font-weight: 700; }
+.field input { width: 100%; padding: 0.85rem 1rem; color: $ink; background: $surface; border: 1px solid $line; border-radius: $radius-sm; outline: none; transition: border-color 160ms, box-shadow 160ms; }
+.field input:focus { border-color: $forest; box-shadow: 0 0 0 3px rgba($forest, 0.14); }
+.field input[aria-invalid='true'] { border-color: $danger; }
+.error { min-height: 1.2rem; margin: 0.35rem 0 0; color: $danger; font-size: 0.78rem; }
+.form-footnote { margin: $space-3 0 0; color: $muted; font-size: 0.8rem; line-height: 1.5; }
+.button { display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem; border: 0; border-radius: $radius-sm; padding: 0.85rem 1.15rem; font-weight: 700; transition: transform 160ms, background 160ms; }
+.button:hover { transform: translateY(-1px); }
+.button:focus-visible { outline: 3px solid rgba($forest, 0.25); outline-offset: 2px; }
+.button--primary { color: white; background: $forest; }
+.button--primary:hover { background: $forest-dark; }
+.button--secondary { color: $forest-dark; background: $mint; }
+.button--tertiary { color: $forest; background: transparent; padding-inline: 0; }
+.button--full { width: 100%; }
+.feature-note { padding: $space-5; background: $peach; border-radius: $radius-lg; transform: rotate(2deg); }
+.feature-note h2 { margin-bottom: $space-2; font-family: $serif; font-size: 2rem; font-weight: 500; }
+.feature-note p { color: rgba($ink, 0.72); line-height: 1.6; }
+.checkout-panel { max-width: 48rem; margin: $space-6 auto; padding: clamp($space-4, 5vw, $space-6); }
+.checkout-top { display: flex; justify-content: space-between; gap: $space-4; align-items: start; margin-bottom: $space-5; }
+.checkout-top h1 { margin-bottom: $space-2; font-size: clamp(2.5rem, 6vw, 4.5rem); }
+.summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: $space-3; margin-bottom: $space-5; padding: $space-3; background: $paper; border-radius: $radius-sm; }
+.summary span { display: block; color: $muted; font-size: 0.78rem; }
+.summary strong { display: block; margin-top: 0.25rem; }
+.modal-backdrop { position: fixed; inset: 0; display: grid; place-items: center; padding: $space-4; background: rgba($ink, 0.48); z-index: 10; }
+.modal { width: min(100%, 28rem); padding: $space-5; background: $surface; border-radius: $radius-lg; box-shadow: $shadow; }
+.modal-header { display: flex; justify-content: space-between; gap: $space-3; align-items: start; margin-bottom: $space-4; }
+.modal h2 { margin-bottom: 0; font-family: $serif; font-size: 2rem; font-weight: 500; }
+.modal-close { color: $muted; background: none; border: 0; font-size: 1.5rem; line-height: 1; }
+.modal .button + .button { margin-top: $space-2; }
+.otp-input { letter-spacing: 0.45em; text-align: center; font-size: 1.5rem; }
+.status { margin-top: $space-3; color: $forest; font-size: 0.9rem; }
+.otp-demo { margin: $space-4 0; color: $forest-dark; font-family: $serif; font-size: 3rem; font-weight: 700; letter-spacing: 0.18em; text-align: center; }
+
+@media (max-width: 700px) {
+  .app-header { padding: $space-3 $space-4; }
+  .header-note { display: none; }
+  .page { padding: $space-4; }
+  .auth-layout { display: block; min-height: auto; padding-block: $space-5; }
+  .feature-note { margin-top: $space-6; }
+  .checkout-top { display: block; }
+  .checkout-top .button { margin-top: $space-3; }
+}
