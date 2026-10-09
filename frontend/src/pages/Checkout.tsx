@@ -27,7 +27,7 @@ export function Checkout() {
   const [otp, setOtp] = useState('')
   const [otpError, setOtpError] = useState('')
   const [isVerifying, setIsVerifying] = useState(false)
-  const [isRegistered, setIsRegistered] = useState(false)
+  const [isRegistered, setIsRegistered] = useState(Boolean(activeUser))
   const [isLookingUp, setIsLookingUp] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -152,7 +152,7 @@ export function Checkout() {
           <div className="field">
             <label htmlFor="checkout-email">Checkout email</label>
             <input id="checkout-email" name="email" type="email" value={values.email} aria-invalid={Boolean(touched.email && errors.email)} onChange={handleChange} onBlur={handleBlur} />
-            <p className="error">{touched.email ? errors.email : isLookingUp ? 'Checking registered email...' : ''}</p>
+            <p className="error">{touched.email ? errors.email : ''}</p>
           </div>
           <div className="field">
             <label htmlFor="checkout-phone">Phone number</label>
