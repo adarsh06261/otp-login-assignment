@@ -30,6 +30,7 @@ export function Checkout() {
   const [isRegistered, setIsRegistered] = useState(false)
   const [isLookingUp, setIsLookingUp] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [message, setMessage] = useState('')
 
   useEffect(() => {
@@ -97,6 +98,7 @@ export function Checkout() {
     setMessage('')
     try {
       await submitCheckout({ email: values.email, phone: values.phone, shippingAddress: values.address })
+      setIsSubmitted(true)
       setMessage('Checkout submitted successfully.')
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Checkout submission failed.')
@@ -162,7 +164,7 @@ export function Checkout() {
             <input id="address" name="address" value={values.address} placeholder="42 Garden Street, Brooklyn" aria-invalid={Boolean(touched.address && errors.address)} onChange={handleChange} onBlur={handleBlur} />
             <p className="error">{touched.address ? errors.address : ''}</p>
           </div>
-          <Button type="submit" fullWidth disabled={isSubmitting || isLookingUp}>{isSubmitting ? 'Submitting...' : activeUser ? 'Submit Checkout' : 'Verify OTP'}</Button>
+          {!isSubmitted && <Button type="submit" fullWidth disabled={isSubmitting || isLookingUp}>{isSubmitting ? 'Submitting...' : activeUser ? 'Submit Checkout' : 'Verify OTP'}</Button>}
         </form>
         {message && <p className="status" role="status">{message}</p>}
         {activeUser && <Button type="button" variant="tertiary" onClick={handleLogout}>Log out</Button>}
