@@ -151,17 +151,17 @@ export function Checkout() {
         <form onSubmit={handleSubmit} noValidate>
           <div className="field">
             <label htmlFor="checkout-email">Checkout email</label>
-            <input id="checkout-email" name="email" type="email" value={values.email} aria-invalid={Boolean(touched.email && errors.email)} onChange={handleChange} onBlur={handleBlur} />
+            <input id="checkout-email" name="email" type="email" value={values.email} disabled={isSubmitted} aria-invalid={Boolean(touched.email && errors.email)} onChange={handleChange} onBlur={handleBlur} />
             <p className="error">{touched.email ? errors.email : ''}</p>
           </div>
           <div className="field">
             <label htmlFor="checkout-phone">Phone number</label>
-            <input id="checkout-phone" name="phone" value={values.phone} placeholder="+1 555 123 4567" aria-invalid={Boolean(touched.phone && errors.phone)} onChange={handleChange} onBlur={handleBlur} />
+            <input id="checkout-phone" name="phone" value={values.phone} placeholder="+1 555 123 4567" disabled={isSubmitted} aria-invalid={Boolean(touched.phone && errors.phone)} onChange={handleChange} onBlur={handleBlur} />
             <p className="error">{touched.phone ? errors.phone : ''}</p>
           </div>
           <div className="field">
             <label htmlFor="address">Delivery address</label>
-            <input id="address" name="address" value={values.address} placeholder="42 Garden Street, Brooklyn" aria-invalid={Boolean(touched.address && errors.address)} onChange={handleChange} onBlur={handleBlur} />
+            <input id="address" name="address" value={values.address} placeholder="42 Garden Street, Brooklyn" disabled={isSubmitted} aria-invalid={Boolean(touched.address && errors.address)} onChange={handleChange} onBlur={handleBlur} />
             <p className="error">{touched.address ? errors.address : ''}</p>
           </div>
           {!isSubmitted && <Button type="submit" fullWidth disabled={isSubmitting || isLookingUp}>{isSubmitting ? 'Submitting...' : activeUser ? 'Submit Checkout' : 'Verify OTP'}</Button>}
